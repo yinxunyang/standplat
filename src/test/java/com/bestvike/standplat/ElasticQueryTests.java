@@ -1,5 +1,6 @@
 package com.bestvike.standplat;
 
+import com.bestvike.standplat.dao.SysUserDao;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -10,6 +11,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,6 +21,9 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ElasticQueryTests {
+	@Autowired
+	private SysUserDao sysUserDao;
+
 	RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("192.168.237.130", 9200)));
 
 	@Test
@@ -44,6 +49,12 @@ public class ElasticQueryTests {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void test2() {
+		Integer ss = sysUserDao.selectId();
+		System.out.println(ss);
 	}
 
 }

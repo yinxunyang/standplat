@@ -1,7 +1,35 @@
 spring:
   data:
      elasticsearch:
-        #elasticsearch\u670D\u52A1\u5730\u5740\uFF0C\u9ED8\u8BA4\u7AEF\u53E3\u4E3A9300
+        # elasticsearch服务地址，默认端口为9300
         cluster-nodes: 192.168.237.130:9300
-        #\u8282\u70B9\u540D\u5B57\uFF0C\u9ED8\u8BA4elasticsearch
+        # 节点名字，默认elasticsearch
         cluster-name: docker-cluster
+datasources:
+  elastic:
+    datasource:
+      url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+      username: bvdf_aks
+      password: bvdf_aks
+      driverClassName: oracle.jdbc.OracleDriver
+      # 初始化大小，最小，最大
+      initialSize: 6
+      minIdle: 4
+      maxIdle: 15
+      maxActive: 22
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 1 from dual
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+    mybatis:
+      dialect: org.apache.ibatis.dialect.OracleDialect
+      basePackage: com.bestvike.standplat.dao
+      aliasesPackage: com.bestvike.standplat.entity
+      mapperLocations: classpath*:com/bestvike/standplat/mapping/*.xml
+      underscoreToCamelCase: true

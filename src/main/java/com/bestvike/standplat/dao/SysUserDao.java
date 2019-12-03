@@ -9,5 +9,5 @@ public interface SysUserDao {
 	 *
 	 * @return
 	 */
-	public Integer selectId();
+	Integer selectId();
 }
